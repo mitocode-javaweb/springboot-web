@@ -11,8 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mitocode.javaweb.mybatis.domain.Usuario;
-import com.mitocode.javaweb.mybatis.domain.exception.UsuarioNotFoundException;
+import com.mitocode.javaweb.mybatis.usuario.application.UsuarioFinderService;
+import com.mitocode.javaweb.mybatis.usuario.domain.dto.UsuarioDto;
+import com.mitocode.javaweb.mybatis.usuario.domain.exception.UsuarioNotFoundException;
 
 @SpringBootTest
 public class UsuarioFinderServiceTest {
@@ -24,16 +25,16 @@ public class UsuarioFinderServiceTest {
 	
 	@Test
 	public void obtenerLaListaDeUsuarios() {
-		List<Usuario> lista = usuarioFinderService.findAll();
+		List<UsuarioDto> lista = usuarioFinderService.findAll();
 		
 		assertFalse(lista.isEmpty());
 		
-		lista.forEach(usuario -> log.debug(usuario.toString()));
+		lista.forEach(dto -> log.debug(dto.toString()));
 	}
 	
 	@Test
 	public void consultarPorUsuario() throws UsuarioNotFoundException {
-		Usuario usuario = usuarioFinderService.findByUsuario("juanpablo");
+		UsuarioDto usuario = usuarioFinderService.findByUsuario("juanpablo");
 		
 		assertNotNull(usuario);
 		
