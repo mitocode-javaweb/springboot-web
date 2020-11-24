@@ -1,19 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mitocode | Java Web Developer</title>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
-  <!-- Theme style -->
-  <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+<head>
+	<th:block th:insert="/fragments/resources-header" />
 </head>
+
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
@@ -26,23 +17,34 @@
 
       <form th:action="@{/login}" method="post" th:object="${loginForm}">
       	
-      	<div th:if="${message}" th:text="#{login.badcredentials.message}" class="alert alert-danger"></div>
+      	<div th:if="${badcredentials}" th:text="#{login.exceptions.badcredentials}" class="alert alert-danger"></div>
+      	<div th:if="${userblocked}" th:utext="#{login.exceptions.userblocked(*{username})}" class="alert alert-info"></div>
+      	
+      	<div th:if="${#fields.hasErrors('*')}" class="alert alert-warning">
+			<ul class="list list--check" style="margin-block-end: 0;">
+				<li th:each="err : ${#fields.errors('*')}" th:utext="${err}" />
+			</ul>
+		</div>
       
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Email" th:field="*{username}" required="required">
+          <input type="email" class="form-control" placeholder="Email" th:field="*{username}"
+          	th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
+           <span class="error invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" th:field="*{password}" required="required">
+          <input type="password" class="form-control" placeholder="Password" th:field="*{password}"
+          	th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          <span class="error invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         </div>
         <div class="row">
           <div class="col-8">
@@ -72,10 +74,10 @@
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        <a th:href="@{/login/forgot-password}">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a th:href="@{/login/register}" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.card-body -->
@@ -84,11 +86,7 @@
 </div>
 <!-- /.login-box -->
 
-<!-- jQuery -->
-<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-<!-- Bootstrap 4 -->
-<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- AdminLTE App -->
-<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<th:block th:insert="/fragments/resources-footer" />
+
 </body>
 </html>

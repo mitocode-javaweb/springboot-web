@@ -1,33 +1,32 @@
 package com.mitocode.javaweb.mybatis.usuario.application;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.mitocode.javaweb.mybatis.usuario.domain.Usuario;
 import com.mitocode.javaweb.mybatis.usuario.domain.UsuarioRepository;
-import com.mitocode.javaweb.mybatis.usuario.domain.dto.UsuarioDto;
 import com.mitocode.javaweb.mybatis.usuario.domain.exception.UsuarioNotFoundException;
-import com.mitocode.javaweb.mybatis.usuario.infraestructure.dto.UsuarioDtoMapper;
 
 @Service
 public class UsuarioFinderService {
 
 	private UsuarioRepository usuarioRepository;
-	
-	private UsuarioDtoMapper usuarioDtoMapper;
-	
-	public UsuarioFinderService(UsuarioRepository usuarioRepository, UsuarioDtoMapper usuarioDtoMapper) {
+
+	public UsuarioFinderService(UsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
-		this.usuarioDtoMapper = usuarioDtoMapper;
 	}
 
-	public List<UsuarioDto> findAll() {
-		return usuarioDtoMapper.toUsuarioDtos(usuarioRepository.findAll());
+	public Optional<List<Usuario>> findAll() {
+		return Optional.ofNullable(usuarioRepository.findAll());
 	}
-	
-	public UsuarioDto findByUsuario(String usuario) throws UsuarioNotFoundException {
-		return usuarioRepository.findByUsuario(usuario)
-				.map(usuarioDtoMapper::toUsuarioDto)
-				.orElseThrow(UsuarioNotFoundException::new);
+
+	public Usuario findByUsuario(String usuario) throws UsuarioNotFoundException {
+		// ..
+		// ..
+		// ..
+		
+		return usuarioRepository.findByUsuario(usuario).orElseThrow(UsuarioNotFoundException::new);
 	}
 }

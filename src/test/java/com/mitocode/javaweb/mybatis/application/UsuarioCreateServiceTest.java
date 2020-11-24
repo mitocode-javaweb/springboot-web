@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mitocode.javaweb.mybatis.usuario.application.UsuarioCreateService;
-import com.mitocode.javaweb.mybatis.usuario.domain.dto.UsuarioDto;
+import com.mitocode.javaweb.mybatis.usuario.domain.Usuario;
 
 @SpringBootTest
 @Transactional
@@ -25,17 +25,17 @@ public class UsuarioCreateServiceTest {
 	@Test
 //	@Commit // Sirve para confirmar la transaccion
 	public void crearUsuarioCOnTodosLosCampos() {
-		UsuarioDto dto = new UsuarioDto();
-		dto.setUsuario("diegojoel");
-		dto.setNombres("Diego Requejo");
-		dto.setClave("123");
+		Usuario usuario = new Usuario();
+		usuario.setUsuario("diegojoel");
+		usuario.setNombres("Diego Requejo");
+		usuario.setClaveUsuario("123");
 
-		int filas = usuarioCreateService.save(dto);
+		int filas = usuarioCreateService.save(usuario);
 
 		assertNotEquals(0, filas);
-		assertNotNull(dto.getId());
+		assertNotNull(usuario.getId());
 
-		log.debug(dto.toString());
+		log.debug(usuario.toString());
 
 	}
 }

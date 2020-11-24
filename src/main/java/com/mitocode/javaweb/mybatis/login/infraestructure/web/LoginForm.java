@@ -1,10 +1,15 @@
 package com.mitocode.javaweb.mybatis.login.infraestructure.web;
 
-public class LoginForm {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
+public class LoginForm {
 	
+	@NotBlank(message = "{login.forms.email.notempty}")
+	@Email(message = "{login.forms.email.format}")
 	private String username;
 
+	@NotBlank(message = "{login.forms.password.notempty}")
 	private String password;
 
 	private boolean rememberMe;
