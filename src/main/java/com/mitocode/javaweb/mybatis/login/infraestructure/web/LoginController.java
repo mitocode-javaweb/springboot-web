@@ -51,7 +51,7 @@ public class LoginController {
 				
 				session.setAttribute(SessionKeys.LOGIN_USUARIO, usuarioDtoMapper.toUsuarioDto(usuario));
 				
-				pageResult = "home/home";
+				pageResult = "redirect:/home";
 			}
 		} catch (BadCredentialsException e) {
 			modelMap.put("badcredentials", true);

@@ -11,8 +11,8 @@ public class MvnConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		WebMvcConfigurer.super.addViewControllers(registry);
 		
-		registry.addViewController("/").setViewName("/home/home");
-		registry.addViewController("/home").setViewName("/home/home");
+		registry.addViewController("/").setViewName("redirect:/categorias");
+		registry.addViewController("/home").setViewName("redirect:/categorias");
 		registry.addViewController("/login/forgot-password").setViewName("/login/forgot-password");
 		registry.addViewController("/login/register").setViewName("/login/register");
 	}

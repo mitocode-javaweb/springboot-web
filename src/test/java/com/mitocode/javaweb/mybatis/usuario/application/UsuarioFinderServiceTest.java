@@ -1,4 +1,4 @@
-package com.mitocode.javaweb.mybatis.application;
+package com.mitocode.javaweb.mybatis.usuario.application;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

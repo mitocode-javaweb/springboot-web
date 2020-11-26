@@ -20,3 +20,17 @@ INSERT INTO public.usuario(usuario, nombres, clave, estado) VALUES ('pablo', 'Pa
 INSERT INTO public.usuario(usuario, nombres, clave, estado) VALUES ('emilio', 'Emilio Caldas', '123', 'ACTIVO');
 INSERT INTO public.usuario(usuario, nombres, clave, estado) VALUES ('augusto', 'Augusto Muñoz', '123', 'ACTIVO');
 INSERT INTO public.usuario(usuario, nombres, clave, estado) VALUES ('yenuri', 'Yenuri Córdova', '123', 'ACTIVO');
+
+
+CREATE TABLE public.categoria
+(
+    id serial,
+    nombre character varying(25) NOT NULL,
+    descripcion text NOT NULL,
+    imagen bytea,
+    estado character varying(15) NOT NULL,
+    CONSTRAINT categoria_pkey PRIMARY KEY (id)
+);
+
+ALTER TABLE public.categoria
+    OWNER to postgres;

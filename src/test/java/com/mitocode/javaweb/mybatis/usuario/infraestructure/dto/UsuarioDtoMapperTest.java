@@ -1,4 +1,4 @@
-package com.mitocode.javaweb.mybatis.infraestructure.dto;
+package com.mitocode.javaweb.mybatis.usuario.infraestructure.dto;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
