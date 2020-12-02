@@ -31,5 +31,15 @@ public class CategoriaMybatisRepository implements CategoriaRepository{
 	public List<Categoria> findAll() {
 		return categoriaDaoMapper.findAll();
 	}
+
+	@Override
+	public int update(Categoria categoria) {
+		return categoriaDaoMapper.update(categoria);
+	}
+
+	@Override
+	public int delete(Integer id) {
+		return categoriaDaoMapper.delete(id);
+	}
 	
 }

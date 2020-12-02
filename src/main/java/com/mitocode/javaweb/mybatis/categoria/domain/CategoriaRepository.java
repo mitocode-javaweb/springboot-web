@@ -10,5 +10,9 @@ public interface CategoriaRepository {
 	public Optional<Categoria> findById(Integer id);
 	
 	public List<Categoria> findAll();
+	
+	public int update(Categoria categoria);
+	
+	public int delete(Integer id);
 
 }

@@ -9,6 +9,9 @@
   <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}">
   <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}">
   <link rel="stylesheet" th:href="@{/plugins/datatables-buttons/css/buttons.bootstrap4.min.css}">
+  
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" th:href="@{/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css}">
 </head>
 
 <body class="hold-transition layout-navbar-fixed layout-footer-fixed"
@@ -22,7 +25,7 @@
   <th:block th:if="${session.usuarioLogin}" th:insert="/fragments/sidebar" />
 
   <!-- Content Wrapper. Contains page content -->
-  <th:block th:insert="/categoria/categorias-editar-content" />
+  <th:block th:insert="/categoria/categorias-content" />
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
@@ -49,8 +52,11 @@
 <script th:src="@{/plugins/datatables-buttons/js/buttons.print.min.js}"></script>
 <script th:src="@{/plugins/datatables-buttons/js/buttons.colVis.min.js}"></script>
 
+<!-- SweetAlert2 -->
+<script th:src="@{/plugins/sweetalert2/sweetalert2.min.js}"></script>
+
 <!-- Page specific script -->
-<script>
+<script th:inline="javascript">
 	$(function() {
 		$('#example2').DataTable({
 			"paging" : true,
@@ -60,9 +66,44 @@
 			"info" : true,
 			"autoWidth" : true,
 			"responsive" : true,
-			"pageLength" : 3
+			"pageLength" : [[${pageLength}]]
 		});
 	});
+	
+	function eliminarCategoria(url){
+		Swal.fire({
+			title: 'Eliminar Categoria',
+			html: "Esta operaci&oacute;n no se podr&aacute; revertir",
+			icon : "warning",
+			showCancelButton: true,
+			confirmButtonText: [[#{categorias.delete.button.confirm}]],
+			confirmButtonColor: '#d33',
+			showLoaderOnConfirm: true,
+			preConfirm: () => {
+				return fetch(url, { method: 'DELETE' })
+			      .then(response => {
+			    	  if (!response.ok) {
+			    		  throw new Error("Ocurrio un error")
+			    	  }
+			    	  return response.json()
+			      })
+			      .catch(error => {
+			    	  Swal.showValidationMessage(error)
+			      })
+			  },
+			allowOutsideClick: () => !Swal.isLoading()
+		}).then((result) => {
+			if (result.value) {
+				Swal.fire({
+					title: "Resultado",
+					text: result.value.message
+				}).then((result) => {
+					window.location = [[@{/categorias}]];
+				})
+			}
+		});
+		
+	}
 </script>
 
 </body>

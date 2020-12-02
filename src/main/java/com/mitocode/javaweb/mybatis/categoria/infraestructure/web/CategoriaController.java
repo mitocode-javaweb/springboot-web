@@ -6,20 +6,29 @@ import java.io.InputStream;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mitocode.javaweb.mybatis.categoria.application.CategoriaCreateService;
+import com.mitocode.javaweb.mybatis.categoria.application.CategoriaDeleteService;
 import com.mitocode.javaweb.mybatis.categoria.application.CategoriaFinderService;
+import com.mitocode.javaweb.mybatis.categoria.application.CategoriaUpdateService;
 import com.mitocode.javaweb.mybatis.categoria.domain.Categoria;
 import com.mitocode.javaweb.mybatis.categoria.domain.exception.CategoriaNotFoundException;
 import com.mitocode.javaweb.mybatis.categoria.infraestructure.dto.CategoriaDtoMapper;
@@ -34,22 +43,24 @@ public class CategoriaController {
 	private CategoriaFinderService categoriaFinderService;
 	
 	@Autowired
+	private CategoriaCreateService categoriaCreateService;
+	
+	@Autowired
+	private CategoriaUpdateService categoriaUpdateService;
+
+	@Autowired
+	private CategoriaDeleteService categoriaDeleteService;
+	
+	@Autowired
 	private CategoriaDtoMapper categoriaDtoMapper;
 	
-	@GetMapping({"/", ""})
-	public String obtenerCategorias(ModelMap model) {
+	@GetMapping({ "", "/" })
+	public String listarCategorias(ModelMap model) {
 		model.put("categorias", categoriaDtoMapper.toCategoriaDtos(categoriaFinderService.findAll()));
-		
-		return "categoria/categorias-vista";
+		model.put("pageLength", 4);
+
+		return "categoria/categorias";
 	}
-	
-	@GetMapping("/editar")
-	public String editarCategorias(ModelMap model) {
-		model.put("categorias", categoriaDtoMapper.toCategoriaDtos(categoriaFinderService.findAll()));
-		
-		return "categoria/categorias-editar";
-	}
-	
 	
 	@GetMapping("/{id}/imagen")
 	public void obtenerImagen(@PathVariable Integer id, HttpServletResponse response) throws CategoriaNotFoundException, IOException {
@@ -64,22 +75,114 @@ public class CategoriaController {
 	}
 	
 	@GetMapping("/nuevo")
-	public String obtenerCategorias2() {
-		return "";
+	public String nuevaCategoria(ModelMap model, CategoriaForm categoriaForm) {
+		return "categoria/categoria-nuevo";
 	}
 	
 	@PostMapping("/registrar")
-	public String obtenerCategorias3() {
-		return "";
+	public String registrarCategoria(@Valid CategoriaForm categoriaForm, BindingResult bindingResult, 
+			ModelMap model, RedirectAttributes redirectAttributes) throws IOException {
+		String resultPage = "categoria/categoria-nuevo";
+		
+		if(!bindingResult.hasErrors()) {
+			Categoria categoria = new Categoria();
+			categoria.setNombre(categoriaForm.getNombre());
+			categoria.setDescripcion(categoriaForm.getDescripcion());
+			if(!categoriaForm.getImagen().isEmpty()) {
+				categoria.setImagen(categoriaForm.getImagen().getBytes());
+			}
+			
+			int filas = categoriaCreateService.save(categoria);
+			
+			if(filas > 0) {
+				redirectAttributes.addFlashAttribute("categoriaCreateMessage", true);
+				resultPage = "redirect:/categorias";
+			}else {
+				model.put("categoriaCreateErrorMessage", true);
+			}
+		}
+		
+		return resultPage;
 	}
 	
-	@PostMapping("/{id}")
-	public String obtenerCategorias4() {
-		return "";
+	@GetMapping("/{id}/editar")
+	public String editarCategoria(@PathVariable Integer id, CategoriaForm categoriaForm, ModelMap model) throws CategoriaNotFoundException {
+		Optional<Categoria> oCategoria = categoriaFinderService.findById(id);
+		
+		if(oCategoria.isPresent()) {
+			Categoria categoria = oCategoria.get();
+			categoriaForm.setId(categoria.getId());
+			categoriaForm.setNombre(categoria.getNombre());
+			categoriaForm.setDescripcion(categoria.getDescripcion());
+			categoriaForm.setEstado(categoria.getEstado());
+		}
+		
+		return "categoria/categoria-editar";
+	}
+	
+	@PostMapping("/{id}/editar")
+	public String actualizarCategoria(@PathVariable Integer id, @Valid CategoriaForm categoriaForm, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes, ModelMap model) throws IOException {
+		
+		log.debug("categoriaForm: " + categoriaForm.toString());
+		
+		String resultPage = "categoria/categoria-nuevo";
+		
+		if(!bindingResult.hasErrors()) {
+			Categoria categoria = new Categoria();
+			categoria.setId(id);
+			categoria.setNombre(categoriaForm.getNombre());
+			categoria.setDescripcion(categoriaForm.getDescripcion());
+			if(!categoriaForm.getImagen().isEmpty()) {
+				categoria.setImagen(categoriaForm.getImagen().getBytes());
+			}
+			categoria.setEstado(categoriaForm.getEstado());
+			
+			log.debug("categoria: " + categoria.toString());
+			
+			int filas = categoriaUpdateService.update(categoria);
+			
+			if(filas > 0) {
+				redirectAttributes.addFlashAttribute("categoriaEditMessage", true);
+				resultPage = "redirect:/categorias";
+			}else {
+				model.put("categoriaEditErrorMessage", true);
+			}
+		}
+		
+		return resultPage;
 	}
 	
 	@DeleteMapping("/{id}")
-	public String obtenerCategorias5() {
-		return "";
+	@ResponseBody
+	public ResponseEntity<EliminarResponse> eliminarCategoria(@PathVariable Integer id) {
+		int row = categoriaDeleteService.delete(id);
+		ResponseEntity<EliminarResponse> response = null;
+		
+		if(row > 0) {
+			response = new ResponseEntity<EliminarResponse>(new EliminarResponse("Se eliminó correctamente"), HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<EliminarResponse>(new EliminarResponse("Se eliminó correctamente"), HttpStatus.EXPECTATION_FAILED);
+		}
+		
+		return response;
+	}
+}
+
+
+
+class EliminarResponse {
+	private String message;
+
+	public EliminarResponse(String message) {
+		this.message = message;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

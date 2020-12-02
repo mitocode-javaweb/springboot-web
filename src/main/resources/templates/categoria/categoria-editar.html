@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<th:block th:insert="/fragments/resources-header" />
+
+<!-- summernote -->
+<link rel="stylesheet"
+	th:href="@{/plugins/summernote/summernote-bs4.min.css}">
+</head>
+
+<body class="hold-transition layout-navbar-fixed layout-footer-fixed"
+	th:classappend="${session.usuarioLogin} ?  'sidebar-mini' : 'layout-top-nav'">
+	<div class="wrapper">
+		<!-- Navbar -->
+		<th:block th:insert="/fragments/navbar" />
+		<!-- /.navbar -->
+
+		<!-- Main Sidebar Container -->
+		<th:block th:if="${session.usuarioLogin}"
+			th:insert="/fragments/sidebar" />
+
+		<!-- Content Wrapper. Contains page content -->
+		<th:block th:insert="/categoria/categoria-editar-content" />
+		<!-- /.content-wrapper -->
+
+		<!-- Main Footer -->
+		<th:block th:insert="/fragments/footer" />
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- REQUIRED SCRIPTS -->
+	<th:block th:insert="/fragments/resources-footer" />
+	<!-- Summernote -->
+	<script th:src="@{/plugins/summernote/summernote-bs4.min.js}"></script>
+	<!-- bs-custom-file-input -->
+	<script
+		th:src="@{/plugins/bs-custom-file-input/bs-custom-file-input.min.js}"></script>
+
+	<!-- Page specific script -->
+	<script>
+		bsCustomFileInput.init();
+	    
+	    // Summernote
+	    $('#inputDescripcion').summernote();
+	</script>
+
+</body>
+</html>

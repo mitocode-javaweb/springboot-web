@@ -54,7 +54,7 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return "CategoriaDto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", estado=" + estado
+		return "Categoria [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", estado=" + estado
 				+ "]";
 	}
 

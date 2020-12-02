@@ -34,3 +34,42 @@ CREATE TABLE public.categoria
 
 ALTER TABLE public.categoria
     OWNER to postgres;
+    
+CREATE TABLE public.producto
+(
+    id bigserial,
+    nombre_corto character varying(20) NOT NULL,
+    nombre_extenso character varying(75),
+    descripcion_corta character varying(50) NOT NULL,
+    descripcion_extensa text,
+    cantidad integer NOT NULL,
+    id_categoria integer,
+    CONSTRAINT producto_pkey PRIMARY KEY (id),
+    CONSTRAINT producto_categoria_fkey FOREIGN KEY (id_categoria)
+        REFERENCES public.categoria (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+ALTER TABLE public.producto
+    OWNER to postgres;
+    
+
+CREATE TABLE public.producto_mensaje
+(
+    id bigserial NOT NULL,
+    nombre_usuario character varying NOT NULL,
+    fecha date NOT NULL,
+    mensaje text,
+    id_producto integer,
+    CONSTRAINT producto_mensaje_pkey PRIMARY KEY (id),
+    CONSTRAINT producto_mensaje_producto_fkey FOREIGN KEY (id_producto)
+        REFERENCES public.producto (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+ALTER TABLE public.producto_mensaje
+    OWNER to postgres;
