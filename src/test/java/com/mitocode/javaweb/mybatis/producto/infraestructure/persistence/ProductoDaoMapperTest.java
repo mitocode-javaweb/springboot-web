@@ -2,6 +2,7 @@ package com.mitocode.javaweb.mybatis.producto.infraestructure.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ public class ProductoDaoMapperTest {
 	private ProductoDaoMapper productoDaoMapper;
 
 	@Test
+	@Disabled
 	public void consultarProducto() {
 		Producto producto = productoDaoMapper.findById(1);
 		

@@ -39,40 +39,55 @@
 				data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-				<li class="nav-item">
-					<a href="#" class="nav-link"> <i
-						class="nav-icon fas fa-tachometer-alt"></i>
+               
+				<li class="nav-item"
+					th:classappend="${modulo == 'categoria' ? 'menu-open' : ''}"
+					sec:authorize="hasAuthority('ADMIN')">
+					<a href="#" class="nav-link"
+						th:classappend="${modulo == 'categoria' ? 'active' : ''}"> 
+					<i class="nav-icon fas fa-tachometer-alt"></i>
 						<p>
 							Módulo de Categoría <i class="right fas fa-angle-left"></i>
 						</p>
-					</a>
+				</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item"><a th:href="@{/categorias}"
-							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+							class="nav-link"
+							th:classappend="${opcion == 'listar' ? 'active' : ''}">
+							 <i class="far fa-circle nav-icon"></i>
 								<p>Listar</p>
 						</a></li>
 						<li class="nav-item"><a th:href="@{/categorias/nuevo}"
-							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+							class="nav-link"
+							th:classappend="${opcion == 'crear' ? 'active' : ''}"> 
+							<i class="far fa-circle nav-icon"></i>
 								<p>Crear</p>
 						</a></li>
 					</ul></li>
-				<li class="nav-item"><a href="../widgets.html" class="nav-link">
+				<li class="nav-item"
+					th:classappend="${modulo == 'home' ? 'menu-open' : ''}"
+					sec:authorize="hasAuthority('USER')">
+					<a href="#" class="nav-link"
+						th:classappend="${modulo == 'home' ? 'active' : ''}">
 						<i class="nav-icon fas fa-th"></i>
 						<p>
-							Widgets <span class="right badge badge-danger">New</span>
+							Home <i class="right fas fa-angle-left"></i>
 						</p>
-				</a></li>
-				<li class="nav-header">EXAMPLES</li>
-				<li class="nav-item"><a href="../calendar.html"
-					class="nav-link"> <i class="nav-icon far fa-calendar-alt"></i>
-						<p>
-							Calendar <span class="badge badge-info right">2</span>
-						</p>
-				</a></li>
-				<li class="nav-item"><a href="../gallery.html" class="nav-link">
-						<i class="nav-icon far fa-image"></i>
-						<p>Gallery</p>
-				</a></li>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a th:href="@{/home}"
+							class="nav-link"
+							th:classappend="${opcion == 'home' ? 'active' : ''}"> 
+							<i class="far fa-circle nav-icon"></i>
+								<p>Home</p>
+						</a></li>
+						<li class="nav-item"><a th:href="@{#}"
+							class="nav-link"
+							th:classappend="${opcion == 'vercarrito' ? 'active' : ''}"> 
+							<i class="far fa-circle nav-icon"></i>
+								<p>Ver Carrito</p>
+						</a></li>
+					</ul></li>
 			</ul>
 		</nav>
 		<!-- /.sidebar-menu -->

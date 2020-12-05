@@ -17,15 +17,15 @@ import com.mitocode.javaweb.mybatis.usuario.domain.Usuario;
 @Mapper
 public interface UsuarioDaoMapper {
 
-	@Select("SELECT id, usuario, nombres, clave, estado FROM usuario")
+	@Select("SELECT id, usuario, nombres, clave, estado, rol FROM usuario")
 	@Results({ @Result(column = "clave", property = "claveUsuario") })
 	public List<Usuario> findAll();
 
-	@Select("SELECT id, usuario, nombres, clave, estado FROM usuario WHERE id = #{id}")
+	@Select("SELECT id, usuario, nombres, clave, estado, rol FROM usuario WHERE id = #{id}")
 	@Results({ @Result(column = "clave", property = "claveUsuario") })
 	public Usuario findById(Integer id);
 
-	@Select("SELECT id, usuario, nombres, clave, estado FROM usuario WHERE usuario = #{identificador}")
+	@Select("SELECT id, usuario, nombres, clave, estado, rol FROM usuario WHERE usuario = #{identificador}")
 	@Results({ @Result(column = "clave", property = "claveUsuario") })
 	public Usuario findByUsuario(@Param("identificador") String usuario);
 

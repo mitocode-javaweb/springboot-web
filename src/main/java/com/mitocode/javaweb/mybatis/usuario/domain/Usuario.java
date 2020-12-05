@@ -9,9 +9,11 @@ public class Usuario {
 	private String nombres;
 
 	private String claveUsuario;
-	
+
 	private UsuarioEstadoEnum estado;
-	
+
+	private String rol;
+
 	public Usuario() {
 		this.estado = UsuarioEstadoEnum.ACTIVO;
 	}
@@ -63,10 +65,18 @@ public class Usuario {
 		this.estado = estado;
 	}
 
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", usuario=" + usuario + ", nombres=" + nombres + ", claveUsuario=" + claveUsuario + ", estado="
-				+ estado + "]";
+		return "Usuario [id=" + id + ", usuario=" + usuario + ", nombres=" + nombres + ", claveUsuario=" + claveUsuario
+				+ ", estado=" + estado + ", rol=" + rol + "]";
 	}
 
 }

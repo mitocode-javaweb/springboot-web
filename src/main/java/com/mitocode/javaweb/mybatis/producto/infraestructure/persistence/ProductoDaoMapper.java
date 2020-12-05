@@ -1,6 +1,6 @@
 package com.mitocode.javaweb.mybatis.producto.infraestructure.persistence;
 
-import java.awt.List;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
@@ -34,5 +34,31 @@ public interface ProductoDaoMapper {
 		)
 	})
 	public Producto findById(Integer id);
+	
+	@Select("SELECT * FROM producto WHERE id = #{id}")
+	@Results({
+		@Result(property = "id", column = "id"),
+		@Result(property = "nombreCorto", column = "nombre_corto"),
+		@Result(property = "nombreExtenso", column = "nombre_extenso"),
+		@Result(property = "descripcionCorta", column = "descripcion_corta"),
+		@Result(property = "descripcionExtensa", column = "descripcion_extensa"),
+		@Result(property = "categoria.id", column = "id_categoria")
+	})
+	public Producto findMinById(Integer id);
+	
+	@Select("SELECT * FROM producto WHERE id_categoria = #{idCategoria}")
+	@Results({
+		@Result(property = "id", column = "id"),
+		@Result(property = "nombreCorto", column = "nombre_corto"),
+		@Result(property = "nombreExtenso", column = "nombre_extenso"),
+		@Result(property = "descripcionCorta", column = "descripcion_corta"),
+		@Result(property = "descripcionExtensa", column = "descripcion_extensa"),
+		@Result(property = "categoria.id", column = "id_categoria")
+	})
+	public Producto findMinByIdCategoria(Integer idCategoria);
+	
+	
+	
+	
 	
 }

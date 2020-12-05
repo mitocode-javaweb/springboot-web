@@ -13,7 +13,8 @@ public class MvnConfig implements WebMvcConfigurer {
 		
 //		registry.addViewController("/").setViewName("redirect:/categorias");
 //		registry.addViewController("/home").setViewName("redirect:/categorias");
-		registry.addViewController("/login/forgot-password").setViewName("/login/forgot-password");
-		registry.addViewController("/login/register").setViewName("/login/register");
+//		registry.addViewController("/login").setViewName("login/login");
+		registry.addViewController("/login/forgot-password").setViewName("login/forgot-password");
+		registry.addViewController("/login/register").setViewName("login/register");
 	}
 }

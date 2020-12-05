@@ -19,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,10 +55,17 @@ public class CategoriaController {
 	@Autowired
 	private CategoriaDtoMapper categoriaDtoMapper;
 	
+	@ModelAttribute("modulo")
+	public String modulo() {
+		return "categoria";
+	}
+	
 	@GetMapping({ "", "/" })
 	public String listarCategorias(ModelMap model) {
 		model.put("categorias", categoriaDtoMapper.toCategoriaDtos(categoriaFinderService.findAll()));
 		model.put("pageLength", 4);
+		
+		model.put("opcion", "listar");
 
 		return "categoria/categorias";
 	}
@@ -76,6 +84,8 @@ public class CategoriaController {
 	
 	@GetMapping("/nuevo")
 	public String nuevaCategoria(ModelMap model, CategoriaForm categoriaForm) {
+		model.put("opcion", "crear");
+		
 		return "categoria/categoria-nuevo";
 	}
 	

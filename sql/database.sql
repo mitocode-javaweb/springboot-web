@@ -73,3 +73,6 @@ CREATE TABLE public.producto_mensaje
 
 ALTER TABLE public.producto_mensaje
     OWNER to postgres;
+    
+ ALTER TABLE public.usuario
+    ADD COLUMN rol character varying(20);

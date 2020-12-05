@@ -1,5 +1,11 @@
 package com.mitocode.javaweb.mybatis.categoria.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.mitocode.javaweb.mybatis.producto.domain.Producto;
+
 public class Categoria {
 
 	public Integer id;
@@ -8,8 +14,11 @@ public class Categoria {
 	public byte[] imagen;
 	public CategoriaEstado estado;
 
+	private List<Producto> productos;
+
 	public Categoria() {
 		this.estado = CategoriaEstado.ACTIVA;
+		this.productos = new ArrayList<>();
 	}
 
 	public Integer getId() {
@@ -52,10 +61,18 @@ public class Categoria {
 		this.estado = estado;
 	}
 
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", estado=" + estado
-				+ "]";
+		return "Categoria [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen="
+				+ Arrays.toString(imagen) + ", estado=" + estado + ", productos=" + productos + "]";
 	}
 
 }

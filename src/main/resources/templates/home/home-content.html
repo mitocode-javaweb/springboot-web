@@ -19,6 +19,17 @@
 	<!-- Main content -->
 	<section class="content">
 		<!-- Default box -->
+		
+		<div class="alert alert-info">
+			<ul>
+				<li>Autenticado: <span sec:authorize="isAuthenticated()">Usuario autenticado</span> </li>
+				<li>Usuario: <span sec:authentication="name"></span> </lli>
+				<li sec:authorize="hasAuthority('ADMIN')"> Es ADMIN </lli>
+				<li sec:authorize="hasAuthority('USER')"> Es USER </lli>
+			</ul>
+		</div>
+		
+		
 		<div class="card card-solid">
 			<div class="card-body pb-0">
 				<div class="row d-flex align-items-stretch">

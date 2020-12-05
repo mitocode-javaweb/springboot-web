@@ -2,6 +2,8 @@ package com.mitocode.javaweb.mybatis.productomensaje.domain;
 
 import java.time.LocalDate;
 
+import com.mitocode.javaweb.mybatis.producto.domain.Producto;
+
 public class ProductoMensaje {
 
 	private Integer id;
@@ -11,6 +13,12 @@ public class ProductoMensaje {
 	private LocalDate fecha;
 
 	private String mensaje;
+
+	private Producto producto;
+
+	public ProductoMensaje() {
+		this.producto = new Producto();
+	}
 
 	public Integer getId() {
 		return id;
@@ -47,7 +55,7 @@ public class ProductoMensaje {
 	@Override
 	public String toString() {
 		return "ProductoMensaje [id=" + id + ", nombreUsuario=" + nombreUsuario + ", fecha=" + fecha + ", mensaje="
-				+ mensaje + "]";
+				+ mensaje + ", producto=" + producto + "]";
 	}
 
 }

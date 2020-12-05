@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -19,6 +22,9 @@ public interface CategoriaDaoMapper {
 	public int save(Categoria categoria);
 	
 	@Select("SELECT * FROM categoria where id = #{id}")
+	@Results({
+		@Result(property = "productos", column = "id", javaType = List.class, many = @Many(select = "com.mitocode.javaweb.mybatis.producto.infraestructure.persistence.ProductoDaoMapper.findMinByIdCategoria"))
+	})
 	public Categoria findById(Integer id);
 	
 	@Select("SELECT * FROM categoria")
