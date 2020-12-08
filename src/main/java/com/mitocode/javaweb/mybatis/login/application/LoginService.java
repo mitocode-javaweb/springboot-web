@@ -1,5 +1,6 @@
 package com.mitocode.javaweb.mybatis.login.application;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.mitocode.javaweb.mybatis.login.domain.exception.BadCredentialsException;
@@ -13,7 +14,7 @@ public class LoginService {
 
 	private UsuarioRepository usuarioRepository;
 	
-	public LoginService(UsuarioRepository usuarioRepository) {
+	public LoginService(@Qualifier("usuarioJpaRepository") UsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
 	}
 

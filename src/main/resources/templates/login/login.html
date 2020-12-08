@@ -17,8 +17,9 @@
 
       <form th:action="@{/login}" method="post" th:object="${loginForm}">
       	
-      	<div th:if="${badcredentials}" th:text="#{login.exceptions.badcredentials}" class="alert alert-danger"></div>
+      	<div th:if="${param.error}" th:text="#{login.exceptions.badcredentials}" class="alert alert-danger"></div>
       	<div th:if="${userblocked}" th:utext="#{login.exceptions.userblocked(*{username})}" class="alert alert-info"></div>
+      	<div th:if="${param.logout}" th:utext="#{logout.message}" class="alert alert-info"></div>
       	
       	<div th:if="${#fields.hasErrors('*')}" class="alert alert-warning">
 			<ul class="list list--check" style="margin-block-end: 0;">

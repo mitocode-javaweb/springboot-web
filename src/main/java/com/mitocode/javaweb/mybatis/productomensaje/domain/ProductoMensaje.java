@@ -52,6 +52,14 @@ public class ProductoMensaje {
 		this.mensaje = mensaje;
 	}
 
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductoMensaje [id=" + id + ", nombreUsuario=" + nombreUsuario + ", fecha=" + fecha + ", mensaje="

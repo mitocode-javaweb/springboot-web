@@ -1,5 +1,6 @@
 package com.mitocode.javaweb.mybatis.usuario.application;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.mitocode.javaweb.mybatis.usuario.domain.Usuario;
@@ -10,7 +11,7 @@ public class UsuarioCreateService {
 
 	private UsuarioRepository usuarioRepository;
 
-	public UsuarioCreateService(UsuarioRepository usuarioRepository) {
+	public UsuarioCreateService(@Qualifier("usuarioJpaRepository") UsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
 	}
 

@@ -23,6 +23,7 @@ public interface CategoriaDaoMapper {
 	
 	@Select("SELECT * FROM categoria where id = #{id}")
 	@Results({
+		@Result(property = "id", column = "id"),
 		@Result(property = "productos", column = "id", javaType = List.class, many = @Many(select = "com.mitocode.javaweb.mybatis.producto.infraestructure.persistence.ProductoDaoMapper.findMinByIdCategoria"))
 	})
 	public Categoria findById(Integer id);

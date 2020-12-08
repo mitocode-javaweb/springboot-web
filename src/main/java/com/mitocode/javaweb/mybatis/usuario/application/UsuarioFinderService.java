@@ -3,6 +3,7 @@ package com.mitocode.javaweb.mybatis.usuario.application;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.mitocode.javaweb.mybatis.usuario.domain.Usuario;
@@ -14,7 +15,7 @@ public class UsuarioFinderService {
 
 	private UsuarioRepository usuarioRepository;
 
-	public UsuarioFinderService(UsuarioRepository usuarioRepository) {
+	public UsuarioFinderService(@Qualifier("usuarioJpaRepository") UsuarioRepository usuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
 	}
 
