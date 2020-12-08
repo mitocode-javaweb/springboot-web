@@ -4,7 +4,7 @@
 				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <th:block th:insert="/fragments/resources-header" />
+  <th:block th:insert="fragments/resources-header" />
 </head>
 
 
@@ -21,24 +21,24 @@
 	th:classappend="${session.usuarioLogin} ?  'sidebar-mini' : 'layout-top-nav'">
 <div class="wrapper">
   <!-- Navbar -->
-  <th:block th:insert="/fragments/navbar" />
+  <th:block th:insert="fragments/navbar" />
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <th:block th:if="${session.usuarioLogin}" th:insert="/fragments/sidebar" />
+  <th:block th:if="${session.usuarioLogin}" th:insert="fragments/sidebar" />
 
   <!-- Content Wrapper. Contains page content -->
-  <th:block th:insert="/home/home-content" />
+  <th:block th:insert="home/home-content" />
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
-  <th:block th:insert="/fragments/footer" />
+  <th:block th:insert="fragments/footer" />
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 
-<th:block th:insert="/fragments/resources-footer" />
+<th:block th:insert="fragments/resources-footer" />
 
 <!-- OPTIONAL SCRIPTS -->
 
