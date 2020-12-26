@@ -33,6 +33,10 @@ import com.mitocode.javaweb.mybatis.categoria.infraestructure.dto.CategoriaDto;
 import com.mitocode.javaweb.mybatis.categoria.infraestructure.dto.CategoriaDtoMapper;
 import com.mitocode.javaweb.mybatis.shared.infraestructure.dto.CycleAvoidingMappingContext;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/api/v1/categorias")
 public class CategoriaRestController {
@@ -63,12 +67,18 @@ public class CategoriaRestController {
 		return lista;
 	}
 	
+	@Operation(description = "Obtener la imagen de una categoría")
 	@GetMapping(value = "/{id}/image",  produces = MediaType.IMAGE_JPEG_VALUE)
 	public @ResponseBody byte[] getImage(@PathVariable String id) throws NumberFormatException, CategoriaNotFoundException {
 	    Optional<Categoria> categoria = categoriaFinderService.findById(Integer.valueOf(id));
 	    return categoria.get().getImagen();
 	}
 	
+	@Operation(description = "Obtener una categoría")
+	@ApiResponses({
+		@ApiResponse(responseCode = "404", description = "No encontrado"),
+		@ApiResponse(responseCode = "400", description = "Parámetros erróneos")
+	})
 	@GetMapping("/{id}")
 	public ResponseEntity<CategoriaDto> getCategoria(@PathVariable String id, HttpServletRequest request) {
 		try {

@@ -35,6 +35,8 @@ import com.mitocode.javaweb.mybatis.categoria.domain.exception.CategoriaNotFound
 import com.mitocode.javaweb.mybatis.categoria.infraestructure.dto.CategoriaDtoMapper;
 import com.mitocode.javaweb.mybatis.shared.infraestructure.dto.CycleAvoidingMappingContext;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @Controller
 @RequestMapping("/categorias")
 public class CategoriaController {
@@ -164,6 +166,7 @@ public class CategoriaController {
 		return resultPage;
 	}
 	
+	@Operation(hidden = true)
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<EliminarResponse> eliminarCategoria(@PathVariable Integer id) {
