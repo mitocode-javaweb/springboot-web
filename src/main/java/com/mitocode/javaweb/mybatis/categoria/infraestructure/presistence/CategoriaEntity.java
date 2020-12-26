@@ -14,11 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.mitocode.javaweb.mybatis.categoria.domain.CategoriaEstado;
 import com.mitocode.javaweb.mybatis.producto.infraestructure.persistence.ProductoEntity;
 
 @Entity
 @Table(name = "categoria")
+@DynamicUpdate
 public class CategoriaEntity {
 
 	@Id

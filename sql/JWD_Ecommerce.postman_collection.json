@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "f425f664-9bdf-4ba0-bb6b-a0a7b7e8a601",
+		"name": "JWD_Ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "Llistar Categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Categoría Imagen",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/categorias/3/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"categorias",
+								"3",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Categoría",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/categorias/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"categorias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Categoría",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/categorias/32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"categorias",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Categoría",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Electro\",\r\n    \"descripcion\": \"Categoría de electrodomesticos\",\r\n    \"estado\": \"ACTIVA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/categorias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Categoría Form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "Computadoras 66",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Categoría de <b>computadoras</b> y artículos de computo",
+									"type": "text"
+								},
+								{
+									"key": "fileImagen",
+									"type": "file",
+									"src": "/C:/Users/Usuario/Pictures/E-commerce/Categorias/VideoJuegos.jpg"
+								},
+								{
+									"key": "estado",
+									"value": "SIN_STOCK",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/categorias/formulario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"categorias",
+								"formulario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Categoría Imagen",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Usuario/Pictures/E-commerce/Categorias/VideoJuegos.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/categorias/29/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"categorias",
+								"29",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Categoría Form",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "VideoJuegos",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Categoría <b>de computadoras</b> y artículos de computo",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "fileImagen",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "SIN_STOCK",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/categorias/27",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"categorias",
+								"27"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "Obtener Producto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/jwd/api/v1/productos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jwd",
+								"api",
+								"v1",
+								"productos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mitocode.javaweb.mybatis.categoria.application.CategoriaFinderService;
 import com.mitocode.javaweb.mybatis.categoria.infraestructure.dto.CategoriaDtoMapper;
+import com.mitocode.javaweb.mybatis.shared.infraestructure.dto.CycleAvoidingMappingContext;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -59,7 +60,7 @@ public class ReporteCategoriaController {
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("NOMBRE_PROYECTO", "Java Web Developer");
 		
-		JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(categoriaDtoMapper.toCategoriaDtos(categoriaFinderService.findAll()));
+		JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(categoriaDtoMapper.toCategoriaDtos(categoriaFinderService.findAll(), new CycleAvoidingMappingContext()));
 		
 		JasperPrint print = JasperFillManager.fillReport(report, parameters, source);
 		byte[] data = JasperExportManager.exportReportToPdf(print);

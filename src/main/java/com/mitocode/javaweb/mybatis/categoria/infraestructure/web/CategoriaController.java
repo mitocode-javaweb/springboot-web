@@ -33,6 +33,7 @@ import com.mitocode.javaweb.mybatis.categoria.application.CategoriaUpdateService
 import com.mitocode.javaweb.mybatis.categoria.domain.Categoria;
 import com.mitocode.javaweb.mybatis.categoria.domain.exception.CategoriaNotFoundException;
 import com.mitocode.javaweb.mybatis.categoria.infraestructure.dto.CategoriaDtoMapper;
+import com.mitocode.javaweb.mybatis.shared.infraestructure.dto.CycleAvoidingMappingContext;
 
 @Controller
 @RequestMapping("/categorias")
@@ -62,7 +63,7 @@ public class CategoriaController {
 	
 	@GetMapping({ "", "/" })
 	public String listarCategorias(ModelMap model) {
-		model.put("categorias", categoriaDtoMapper.toCategoriaDtos(categoriaFinderService.findAll()));
+		model.put("categorias", categoriaDtoMapper.toCategoriaDtos(categoriaFinderService.findAll(), new CycleAvoidingMappingContext()));
 		model.put("pageLength", 4);
 		
 		model.put("opcion", "listar");

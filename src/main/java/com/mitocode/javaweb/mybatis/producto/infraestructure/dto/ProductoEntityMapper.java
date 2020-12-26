@@ -3,7 +3,6 @@ package com.mitocode.javaweb.mybatis.producto.infraestructure.dto;
 import org.mapstruct.Context;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.mitocode.javaweb.mybatis.categoria.infraestructure.dto.CategoriaEntityMapper;
 import com.mitocode.javaweb.mybatis.producto.domain.Producto;
@@ -14,7 +13,7 @@ import com.mitocode.javaweb.mybatis.shared.infraestructure.dto.CycleAvoidingMapp
 @Mapper(componentModel = "spring", uses = { CategoriaEntityMapper.class, ProductoMensajeEntityMapper.class })
 public interface ProductoEntityMapper {
 
-	@Mapping(target = "mensajes", ignore = true)
+//	@Mapping(target = "mensajes", ignore = true)
 	Producto toProducto(ProductoEntity entity, @Context CycleAvoidingMappingContext context);
 
 	@InheritInverseConfiguration

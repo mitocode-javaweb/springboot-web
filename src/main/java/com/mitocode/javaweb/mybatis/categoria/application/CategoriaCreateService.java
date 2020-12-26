@@ -1,5 +1,6 @@
 package com.mitocode.javaweb.mybatis.categoria.application;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.mitocode.javaweb.mybatis.categoria.domain.Categoria;
@@ -10,7 +11,7 @@ public class CategoriaCreateService {
 
 	private CategoriaRepository categoriaRepository;
 
-	public CategoriaCreateService(CategoriaRepository categoriaRepository) {
+	public CategoriaCreateService(@Qualifier("categoriaJpaRepository") CategoriaRepository categoriaRepository) {
 		this.categoriaRepository = categoriaRepository;
 	}
 	
