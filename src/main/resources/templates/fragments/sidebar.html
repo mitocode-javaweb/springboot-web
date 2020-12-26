@@ -88,6 +88,63 @@
 								<p>Ver Carrito</p>
 						</a></li>
 					</ul></li>
+					
+				<li class="nav-item"
+					th:classappend="${modulo == 'reportes' ? 'menu-open' : ''}">
+					<a href="#" class="nav-link" th:classappend="${modulo == 'reportes' ? 'active' : ''}">
+						<i class="nav-icon fas fa-th"></i>
+						<p> Reportes <i class="right fas fa-angle-left"></i> </p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a th:href="@{#}" class="nav-link" 
+								th:classappend="${submodulo == 'categoria' ? 'active' : ''}"> 
+							<i class="far fa-circle nav-icon"></i>
+								<p>De Categoría <i class="right fas fa-angle-left"></i></p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{/reportes/categorias/reporte01}" class="nav-link" 
+										target="_blank"
+										th:classappend="${opcion == 'visualizar' ? 'active' : ''}"> 
+									<i class="far fa-dot-circle nav-icon"></i>
+										<p>Visualizar</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a th:href="@{/reportes/categorias/reporte01?mode=attach}" class="nav-link"
+										th:classappend="${opcion == 'descargar' ? 'active' : ''}"> 
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Descargar</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a th:href="@{#}" class="nav-link" 
+								th:classappend="${submodulo == 'producto' ? 'active' : ''}"> 
+							<i class="far fa-circle nav-icon"></i>
+								<p>De Productos <i class="right fas fa-angle-left"></i></p>
+							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a th:href="@{#}" class="nav-link" 
+										th:classappend="${opcion == 'visualizar' ? 'active' : ''}"> 
+									<i class="far fa-dot-circle nav-icon"></i>
+										<p>Visualizar</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a th:href="@{#}" class="nav-link"
+										th:classappend="${opcion == 'descargar' ? 'active' : ''}"> 
+										<i class="far fa-dot-circle nav-icon"></i>
+										<p>Descargar</p>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
 			</ul>
 		</nav>
 		<!-- /.sidebar-menu -->

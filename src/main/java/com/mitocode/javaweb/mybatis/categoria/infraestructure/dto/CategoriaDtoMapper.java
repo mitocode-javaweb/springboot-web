@@ -3,6 +3,7 @@ package com.mitocode.javaweb.mybatis.categoria.infraestructure.dto;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.mitocode.javaweb.mybatis.categoria.domain.Categoria;
 import com.mitocode.javaweb.mybatis.categoria.domain.dto.CategoriaDto;
@@ -12,6 +13,7 @@ public interface CategoriaDtoMapper {
 
 	Categoria toCategoria(CategoriaDto cateogiraDto);
 
+	@Mapping(target = "estadoDescripcion", source = "estado.descripcion")
 	CategoriaDto toCategoriaDto(Categoria cateogira);
 
 	List<Categoria> toCategorias(List<CategoriaDto> cateogiraDtos);

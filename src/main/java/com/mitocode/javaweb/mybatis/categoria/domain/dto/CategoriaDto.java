@@ -9,6 +9,7 @@ public class CategoriaDto {
 	public String descripcion;
 	public byte[] imagen;
 	public CategoriaEstado estado;
+	public String estadoDescripcion;
 
 	public CategoriaDto() {
 		this.estado = CategoriaEstado.ACTIVA;
@@ -52,6 +53,14 @@ public class CategoriaDto {
 
 	public void setEstado(CategoriaEstado estado) {
 		this.estado = estado;
+	}
+	
+	public String getEstadoDescripcion() {
+		return estadoDescripcion;
+	}
+
+	public void setEstadoDescripcion(String estadoDescripcion) {
+		this.estadoDescripcion = estadoDescripcion;
 	}
 
 	@Override
